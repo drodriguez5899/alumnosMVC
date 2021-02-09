@@ -89,7 +89,33 @@ public class servletGestion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        ArrayList<Alumno> alumnosSeleccionados = new ArrayList<Alumno>();
+        String grupoSeleccionado=request.getParameter("grupo");
+        ArrayList<Alumno> alumnos = Utilidades.getAlumnos(rutaFicheros.
+               concat(File.separator).concat(grupoSeleccionado.replace(" ", "")).concat(".txt"));
+        if("2daw_a".equals(grupoSeleccionado)){
+             for(Alumno al: alumnos){
+                    if(request.getParameter(String.valueOf(al.getId()))!=null){
+                        Alumno a = new Alumno(al.getId(),al.getNombre(),al.getApellidos(),al.getEmail());
+                        alumnosSeleccionados.add(a);
+                    }
+                }
+        }else if("2daw_b".equals(grupoSeleccionado)){
+            for(Alumno al: alumnos){
+                    if(request.getParameter(String.valueOf(al.getId()))!=null){
+                        Alumno a = new Alumno(al.getId(),al.getNombre(),al.getApellidos(),al.getEmail());
+                        alumnosSeleccionados.add(a);
+                    }
+                }
+        }
+      
+        request.setAttribute("grupo", grupoSeleccionado);
+        request.setAttribute("alumnosSeleccionados", alumnosSeleccionados);
+        request.getRequestDispatcher("resumen.jsp").forward(request, response);
+        
+        
+        
+      
     }
 
     /**

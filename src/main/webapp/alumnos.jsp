@@ -36,8 +36,8 @@
           <br>
           <input type="submit" value="Enviar">    
         </form><br>
-        <form method="post">
-            Grupo seleccionado<input type="text" value="<%=grupoSeleccionado%>">
+        <form action="servletGestion" method="post">
+            Grupo seleccionado<input type="text" name="grupo" value="<%=grupoSeleccionado%>">
              <table>           
             <%for(Alumno a: alumnos){%>
                 <tr>
@@ -50,11 +50,7 @@
         </table> 
         <input type="submit" value="Enviar">    
         
-        </form>
-        
-       
-                       
-                            
-                            
+        </form>      
+             
     </body>
 </html>
